@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "微软雅黑";
+}
+
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#comment .loginbox {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .85);
+}
+
+#comment .icon-style {
+    margin-right: 5px;
+    color: #999;
+}
+
+#comment .loginbox .box {
+    height: 300px;
+    width: 300px;
+    padding: 40px 20px 20px 20px;
+    margin: 100px auto;
+    background: #fff;
+}
+
+#comment .loginbox .box h3 {
+    font-size: 16px;
+    font-family: "微软雅黑";
+    text-align: center;
+}
+
+#comment .loginbox .box input {
+    height: 40px;
+    width: 100%;
+    border: 1px solid red;
+    margin: 10px 0;
+    border-radius: 2px;
+}
+
+#comment .loginbox .box input[type="button"] {
+    background: red;
+    color: #fff;
+    font-family: "微软雅黑";
+}
+
+body #comment .loginbox .box .blueBtn {
+    background: #0089FF;
+    border: 1px solid #0089FF;
+}
+
+#comment .userbar {
+    height: 200px;
+    padding: 10px;
+    text-align: center;
+}
+
+#comment .userbar .userimg {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+#comment .userbar .username {
+    display: block;
+    padding: 10px 0;
+    font-size: 18px;
+    color: red;
+    font-weight: bolder;
+}
+
+#comment .commentbox {
+    position: relative;
+    top: 40px;
+    width: 600px;
+    padding: 20px 20px 30px 20px;
+    background: #eee;
+    margin: 0 auto;
+}
+
+#comment .commentbox .loginout {
+    display: block;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+#comment .commentbox .userword {
+    outline: none;
+}
+
+#comment .commemtlist {
+    padding: 10px;
+}
+
+#comment .commemtlist dl {
+    padding: 20px 0;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+#comment .commemtlist dl dt {
+    float: left;
+    text-align: center;
+    margin-right: 15px;
+}
+
+#comment .commemtlist dl dt img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+#comment .commemtlist dl dd {
+    padding-bottom: 10px;
+}
+
+#comment .commemtlist .btbar span {
+    margin-right: 15px;
+    font-size: 10px;
+}
+
+#comment .commemtlist .btbar .red strong {
+    color: red;
+    margin: 0 3px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+#comment .commemtlist .username {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+
+#comment .commemtlist .wordsbox textarea {
+    height: 100px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+#comment .commemtlist .wordsbox span {
+    font-size: 13px;
+    margin-right: 15px;
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+#comment .commemtlist .wordsbox input {
+    float: right;
+    width: 80px;
+    height: 28px;
+    text-align: center;
+    color: #fff;
+    background: red;
+    border: none;
+    border-radius: 3px;
+}

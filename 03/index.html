@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/vue.min.js"></script>
+    <script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
+    <style>
+        .margintop {
+            margin-top: 100px;
+        }
+        
+        #table .center {
+            text-align: center;
+        }
+        
+        #table table tbody td input {
+            width: 80px;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container margintop" id="table">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>id：</label>
+                <input type="text" class="form-control name" placeholder="请输入您的姓名">
+            </div>
+            <div class="form-group">
+                <label>姓名：</label>
+                <input type="text" class="form-control name" placeholder="请输入您的姓名">
+            </div>
+            <div class="form-group">
+                <label>年龄：</label>
+                <input type="text" class="form-control age" placeholder="请输入您的年龄">
+            </div>
+            <div class="form-group">
+                <label>身高：</label>
+                <input type="text" class="form-control height" placeholder="请输入您的身高">
+            </div>
+            <div class="form-group">
+                <label>学校：</label>
+                <input type="text" class="form-control school" placeholder="请输入您的学校">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" @click="add()">添加人物</button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>身高</th>
+                        <th>学校</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(value, index) in msg" class="data-row">
+                        <td><input type="text" v-model="msg[index].id" readonly="readonly"></td>
+                        <td><input type="text" v-model="msg[index].name" readonly="readonly"></td>
+                        <td><input type="text" v-model="msg[index].age" readonly="readonly"></td>
+                        <td><input type="text" v-model="msg[index].height" readonly="readonly"></td>
+                        <td><input type="text" v-model="msg[index].school" readonly="readonly"></td>
+                        <td class="center">
+                            <a href="#" class="btn btn-primary" @click="edit(index)">修改</a>
+                            <a href="#" class="btn btn-success" @click="save(index)">保存</a>
+                            <a href="#" class="btn btn btn-danger" @click="del(index)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var v = new Vue({
+        el: "#table",
+        data: {
+            msg: [{
+                id: 1,
+                name: "张三",
+                age: 28,
+                height: "180cm",
+                school: "清华大学"
+            }, {
+                id: 2,
+                name: "李四",
+                age: 24,
+                height: "183cm",
+                school: "北京大学"
+            }, {
+                id: 3,
+                name: "王五",
+                age: 13,
+                height: "150cm",
+                school: "哈佛大学"
+            }, {
+                id: 4,
+                name: "赵六",
+                age: 22,
+                height: "167cm",
+                school: "逗比大学"
+            }, {
+                id: 5,
+                name: "哈哈",
+                age: 15,
+                height: "176cm",
+                school: "野鸡大学"
+            }, {
+                id: 6,
+                name: "小小",
+                age: 14,
+                height: "126cm",
+                school: "百度大学"
+            }, {
+                id: 7,
+                name: "大白",
+                age: 35,
+                height: "171cm",
+                school: "美国大学"
+            }],
+            editflag: false
+        },
+        methods: {
+            //添加信息
+            add: function() {
+                var obj = {};
+                var id = document.querySelector(".id").value; //姓名
+                var name = document.querySelector(".name").value; //姓名
+                var age = document.querySelector(".age").value; //年龄
+                var height = document.querySelector(".height").value; //身高
+                var school = document.querySelector(".school").value; //学校
+
+                obj.name = name;
+                obj.age = age;
+                obj.height = height;
+                obj.school = school;
+
+                this.msg.push(obj);
+            },
+            //删除信息
+            del: function(index) {
+                console.log(index);
+                this.msg.splice(index, 1);
+            },
+            //修改信息
+            edit: function(index) {
+                if (!this.editflag) {
+                    console.log($(".data-row").eq(index).find("input"));
+                    $(".data-row").eq(index).find("input").each(function() {
+                        //开启可编辑状态
+                        $(this).removeAttr("readonly");
+                    });
+                    this.editflag = !this.editflag;
+                }
+            },
+            //保存信息
+            save: function(index) {
+                var obj = {};
+                obj.id = $(".data-row").eq(index).find("input").eq(0).val(); //id赋值
+                obj.id = $(".data-row").eq(index).find("input").eq(1).val(); //name赋值
+                obj.id = $(".data-row").eq(index).find("input").eq(2).val(); //age赋值
+                obj.id = $(".data-row").eq(index).find("input").eq(3).val(); //height
+                obj.id = $(".data-row").eq(index).find("input").eq(3).val(); //school
+
+            }
+
+        }
+    });
+</script>
