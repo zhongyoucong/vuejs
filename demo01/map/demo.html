@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+		#r-result{height:100%;width:20%;float:left;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wtGUkLYyeaLxIGo9lLYK34GX"></script>
+	<title>添加多个标注点</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+// 经纬度数据对象
+var pointData = [{
+    longitude: 113.25445,
+    latitude: 23.142551
+},{
+    longitude: 114.067596,
+    latitude: 22.547189
+},{
+    longitude: 114.035329,
+    latitude: 22.615597
+},{
+    longitude: 108.337916,
+    latitude: 22.837206
+}];
+var pointD = new BMap.Point(116.404, 39.915); // 经纬度对象
+var map = new BMap.Map("allmap");  // 创建百度地图实例
+map.enableScrollWheelZoom(); // 允许百度地图缩放
+map.centerAndZoom(pointD, 5);  // 初始化地图级别和中心店
+function showPoint (pointArr) {
+    var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif", new BMap.Size(300,157));
+    pointArr.forEach(function(item, index){
+        var point = new BMap.Point(item.longitude, item.latitude); // 经纬度对象
+        var marker = new BMap.Marker(point, {icon: myIcon});  // 创建标注
+        marker.mapDataIndex = index; // 将数据对象的索引存到对象中
+        map.addOverlay(marker);  // 将标注添加到地图中
+        marker.addEventListener("click",getAttr);
+        
+    });
+}
+// 调用的点击事件
+function getAttr(){
+    // maker对象调用this就会指向他
+	var obj = this.getPosition();       //获取marker的位置
+    alert("marker的位置是" + obj.lng + "," + obj.lat);
+    alert("marker的索引是" + this.mapDataIndex);
+     // window.location.href="http://www.baidu.com";   
+}
+showPoint(pointData);   // 地图上显示对应的图标
+	// // 百度地图API功能
+	// var map = new BMap.Map("allmap");
+	// var point = new BMap.Point(113.25445, 23.142551);
+    // var point1 = new BMap.Point(114.067596,22.547189);
+    // var point2 = new BMap.Point(114.035329,22.615597);
+    // var point3 = new BMap.Point(108.337916,22.837206);
+    // map.enableScrollWheelZoom(); 
+	// map.centerAndZoom(point3, 5);  // 初始化地图级别和中心店
+	// var marker1 = new BMap.Marker(point);  // 创建标注
+	// var marker2 = new BMap.Marker(point1);  // 创建标注
+	// var marker3 = new BMap.Marker(point2);  // 创建标注
+	// var marker4 = new BMap.Marker(point3);  // 创建标注
+	// map.addOverlay(marker1);              // 将标注添加到地图中
+	// map.addOverlay(marker2);              // 将标注添加到地图中
+	// map.addOverlay(marker3);              // 将标注添加到地图中
+	// map.addOverlay(marker4);              // 将标注添加到地图中
+	// marker.addEventListener("click",getAttr);
+	// function getAttr(){
+	// 	var p = marker.getPosition();       //获取marker的位置
+	// 	alert("marker的位置是" + p.lng + "," + p.lat);
+    //    // window.location.href="http://www.baidu.com";   
+	// }
+</script>
