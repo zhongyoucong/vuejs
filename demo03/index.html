@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javasript实现Ctr+c复制Ctr+v粘贴</title>
+  <style>
+    .copy .box {
+      display: inline-block;
+      background: #c25454;
+      height: 100px;
+      width: 100px;
+      line-height: 100px;
+      color: #fff;
+    }
+
+    .copy .box.active {
+      background: red;
+    }
+
+    .content {
+      float: left;
+      margin: 10px 0;
+      height: 800px;
+      width: 800px;
+      background: #ccc;
+    }
+
+    .content .paste-box .box {
+      display: inline-block;
+      background: #c25454;
+      height: 100px;
+      width: 100px;
+      margin: 10px;
+      line-height: 100px;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="copy">
+    <div class="box">复制的内容1</div>
+    <div class="box">复制的内容2</div>
+    <div class="box">复制的内容3</div>
+    <div class="box">复制的内容4</div>
+  </div>
+  <div class="content">
+    <h4>粘贴的内容区域</h4>
+    <div class="paste-box"></div>
+  </div>
+</body>
+<script>
+  let pasteBox = document.querySelector('.paste-box');
+  // 点击选中的元素集合
+  let arrDom = [];
+  debugger;
+  // 点击的要复制的元素
+  let copyElm = Array.prototype.slice.call(document.querySelectorAll('.copy .box'), 0);
+  copyElm.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      arrDom = [];
+      item.classList.toggle('active');
+      // 将所有选中要复制的元素添加存储容器里面
+      arrDom = Array.prototype.slice.call(document.querySelectorAll('.copy .box.active'), 0);
+    }, false);
+  });
+
+  document.onkeyup = function (event) {
+    // 复制
+    if (event.ctrlKey == 1) {
+      if (event.key === 'c') {
+        console.log(arrDom);
+        console.log('复制成功！');
+      }
+    }
+    // 粘贴
+    if (event.ctrlKey == 1) {
+      if (event.key === 'v') {
+        console.log('ctr+v');
+        arrDom.forEach((item, index) => {
+          pasteBox.appendChild(item.cloneNode(true));
+        });
+      }
+    }
+  };
+</script>
+
+</html>

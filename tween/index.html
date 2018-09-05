@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+       
+       #div1 {
+        width: 100px;
+        height: 100px;
+             background: red;
+             position: absolute;
+             left: 100px;
+             top: 200px;
+       }
+
+    </style>
+</head>
+<body>
+    <div id='div1'></div>
+    <!--移入tween.js-->
+    <script src='tween.js'></script>
+    <script type="text/javascript">
+        
+         // 获取元素
+         var oDiv = document.getElementById('div1');
+         var iLeft = 100;   // 初始位置
+         var timer = 0;     //d:总步数  总时间
+
+
+        // 先准备好要传入的四个参数
+        b = iLeft;  //b:初始位置
+        t = 0;      //t:当前已经运动的时间
+        c = 500;    //c:变化的值
+        d = 20;     //d:总步数  总时间
+        timer = setInterval(function() {
+           t++;
+           if (t >= d) {
+                clearInterval(timer);
+           }
+            oDiv.style.left = new TWEEN.Tween().Linear(t, b, c, d) + 'px'; //匀速运动
+        }, 30);
+
+    </script>
+</body>
+</html>
