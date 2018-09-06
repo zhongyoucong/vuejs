@@ -3,9 +3,10 @@
 <body>
 <p id="demo">点击这个按钮，获得您的位置：</p>
 <button onclick="getLocation()">试一下</button>
-<div id="mapholder"></div>
+<div id="mapholder" style="font-size:30px;"></div>
 <script>
 var x=document.getElementById("demo");
+	setInterval(getLocation, 1000);
 function getLocation()
   {
   if (navigator.geolocation)
