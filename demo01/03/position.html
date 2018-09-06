@@ -1,14 +1,38 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @zhongyoucong Sign out
+3
+7 5 zhongyoucong/vuejs
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+vuejs/demo01/03/position.html
+fcc228a  just now
+@zhongyoucong zhongyoucong Update position.html
+     
+58 lines (55 sloc)  1.27 KB
 <!DOCTYPE html>
 <html>
 <body>
-<p id="demo">点击这个按钮，获得您的位置：</p>
-<button onclick="getLocation()">试一下</button>
-<div id="mapholder"></div>
+<h1>H5获取手机经纬度</h1>
+<div id="mapholder">
+	<h1 id=""></h1>
+	<h1 id=""></h1>
+</div>
 <style>
-	#mapholder{
+	#mapholder h1{
 	height:500px;
 	width:800px;
 	margin:100px auto;
+	font-size:80px;
+	color:red;
+	}
+	h1{
+	margin:40px 0;
 	font-size:80px;
 	color:red;
 	}
@@ -26,14 +50,13 @@ function getLocation()
     }
   else{x.innerHTML="Geolocation is not supported by this browser.";}
   }
-
 function showPosition(position)
   {
   lat=position.coords.latitude;
   lon=position.coords.longitude;
-	document.querySelector("#mapholder").innerText = '经度： ' + lat + '          纬度：' + lon;
+  document.querySelectorAll("#mapholder h1")[0].innerText = '经度： ' + lat;
+  document.querySelectorAll("#mapholder h1")[1].innerText = '纬度：' + lon;
   }
-
 function showError(error)
   {
   switch(error.code) 
@@ -55,3 +78,16 @@ function showError(error)
 </script>
 </body>
 </html>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
