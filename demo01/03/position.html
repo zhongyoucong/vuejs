@@ -7,7 +7,7 @@
 <style>
 	#mapholder{
 	height:500px;
-	width:500px;
+	width:800px;
 	margin:100px auto;
 	font-size:80px;
 	color:red;
@@ -31,7 +31,7 @@ function showPosition(position)
   {
   lat=position.coords.latitude;
   lon=position.coords.longitude;
-	document.querySelector("#mapholder").innerText = lat + '----' + lon;
+	document.querySelector("#mapholder").innerText = '经度： ' + lat + '/n 纬度：' + lon;
   }
 
 function showError(error)
