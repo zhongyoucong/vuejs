@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-		#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
-		#r-result{height:100%;width:20%;float:left;}
-	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wtGUkLYyeaLxIGo9lLYK34GX"></script>
-	<title>添加多个标注点</title>
-</head>
 <body>
-	<div id="allmap"></div>
+<p id="demo">点击这个按钮，获得您的位置：</p>
+<button onclick="getLocation()">试一下</button>
+<div id="mapholder"></div>
+<script>
+var x=document.getElementById("demo");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+
+function showPosition(position)
+  {
+  lat=position.coords.latitude;
+  lon=position.coords.longitude;
+	document.querySelector("#mapholder").innerText = lat + '----' + lon;
+  }
+
+function showError(error)
+  {
+  switch(error.code) 
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="An unknown error occurred."
+      break;
+    }
+  }
+</script>
 </body>
 </html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(116.404, 39.915);
-	map.centerAndZoom(point, 15); // 初始化地图级别和中心店
-	// 编写自定义函数,创建标注
-	function addMarker(point){
-	  var marker = new BMap.Marker(point);
-	  map.addOverlay(marker);
-	}
-	// 随机向地图添加25个标注
-	var bounds = map.getBounds();
-	var sw = bounds.getSouthWest();
-	var ne = bounds.getNorthEast();
-	var lngSpan = Math.abs(sw.lng - ne.lng);
-	var latSpan = Math.abs(ne.lat - sw.lat);
-	for (var i = 0; i < 25; i ++) {
-		var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
-		addMarker(point);
-	}
-</script>
