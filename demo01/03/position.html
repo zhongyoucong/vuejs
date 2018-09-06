@@ -6,7 +6,9 @@
 <div id="mapholder" style="font-size:30px;"></div>
 <script>
 var x=document.getElementById("demo");
-	setInterval(getLocation(), 1000);
+	setInterval(function(){
+		document.querySelector("#mapholder").click();
+	}, 1000);
 function getLocation()
   {
   if (navigator.geolocation)
