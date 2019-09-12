@@ -58,19 +58,7 @@
       }, {
         enableHighAccuracy: true, //是否获取高精度经纬度，默认值为false
         timeout: 5000, //获取位置信息的超时时间。单位为毫秒（ms），默认值为不超时
-        maximumAge: 0, //获取位置信息的缓存时间。单位为毫秒（ms），默认值为0（立即更新获取）。如果设备缓存的位置信息超过指定的缓存时间，将重新更新位置信息后再返回。
-        provider: /*(String 类型 )优先使用的定位模块。可取以下供应者： "system"：表示系统定位模块，支持wgs84坐标系； "baidu"：表示百度定位模块，支持gcj02/bd09/bd09ll坐标系； 
-                  "amap"：表示高德定位模板，支持gcj02坐标系。 默认值按以下优先顺序获取（amap>baidu>system），若指定的provider不存在或无效则返回错误回调。 
-                  注意：百度/高德定位模块需要配置百度/高德地图相关参数才能正常使用。平台支持Android - 2.2+ (支持)，iOS - 4.5+ (支持): provider为“baidu”时，
-                  仅支持bd09ll坐标系，暂不支持高德定位模块。*/
-        coordsType: /*(String 类型 )指定获取的定位数据坐标系类型。可取以下坐标系类型： “wgs84”：表示WGS-84坐标系；
-                  “gcj02”：表示国测局经纬度坐标系； “bd09”：表示百度墨卡托坐标系； “bd09ll”：表示百度经纬度坐标系； 
-                    provider为“system”时，默认使用“wgs84”类型；provider为“baidu”是，默认使用“bd09ll”类型。 
-                    如果设置的坐标系类型provider不支持，则返回错误。*/
-
-        geocode: /*(Boolean 类型 )是否解析地址信息。解析的地址信息保存到Position对象的address、addresses属性中，
-                true表示解析地址信息，false表示不解析地址信息，返回的Position对象的address、addresses属性值为undefined，默认值为true。 
-                如果解析地址信息失败则返回的Position对象的address、addresses属性值为null。*/
+        maximumAge: 0 //获取位置信息的缓存时间。单位为毫秒（ms），默认值为0（立即更新获取）。如果设备缓存的位置信息超过指定的缓存时间，将重新更新位置信息后再返回。
       });
     } else {
       alert('手机不支持经纬度定位！');
