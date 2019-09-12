@@ -47,11 +47,9 @@
 	function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (res) {
-        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-          let lat = res && res.point.lat;
-          let lon = res && res.point.lng;
-          position.push(new BMap.Point(lat, lon));
-        }
+        let lat = res && res.point.lat;
+        let lon = res && res.point.lng;
+        position.push(new BMap.Point(lat, lon));
       //是否启用高精确度模
       }, function (err) {
 
