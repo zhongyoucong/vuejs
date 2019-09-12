@@ -64,8 +64,11 @@
   endBtn.onclick = function () {
     clearInterval(timeId);
     let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-    driving.search(...position);//waypoints表示途经点
-    // alert(JSON.stringify(position));
+    let start = position[0];
+    let end = position[position.length - 1];
+    position.pop();
+    position.unshift();
+    driving.search(start, end, {waypoints:[...position]});//waypoints表示途经点
     position = [];
   };
   printData.onclick = function () {
