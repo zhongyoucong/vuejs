@@ -19,7 +19,7 @@
         line-height:50px;
         margin:10px;
         text-align:center;
-        padding:0 10px;
+        width: 100px;
         background:blue;
         color:#fff;
         font-size:16px;
@@ -31,11 +31,13 @@
     <div id="position">
       <span id="startBtn">开始定位</span>
       <span id="endBtn">结束定位</span>
+      <span id="printData">显示当前数据</span>
     </div>
   </body>
   <script>
   let startBtn = document.querySelector('#startBtn');
   let endBtn = document.querySelector('#endBtn');
+  let printData = document.querySelector('#printData');
   let map = new BMap.Map("map");
   let timeId = null;
   map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
@@ -63,8 +65,11 @@
     clearInterval(timeId);
     let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
     driving.search(...position);//waypoints表示途经点
-    alert(JSON.stringify(position));
+    // alert(JSON.stringify(position));
     position = [];
+  };
+  printData.onclick = function () {
+    alert(JSON.stringify(position));
   };
   </script>
 </html>
