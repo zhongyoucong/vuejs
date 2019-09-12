@@ -60,10 +60,11 @@
   };
 
   endBtn.onclick = function () {
-    position = [];
     clearInterval(timeId);
     let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
     driving.search(...position);//waypoints表示途经点
+    alert(JSON.stringify(position));
+    position = [];
   };
   </script>
 </html>
