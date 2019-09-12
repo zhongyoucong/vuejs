@@ -1,57 +1,70 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1 style="color:#333;">H5获取手机经纬度</h1>
-<div id="mapholder">
-	<h1></h1>
-	<h1></h1>
-</div>
-<style>
-*{margin:0;padding:0;}
-	h1{
-	margin:40px 0;
-	font-size:80px;
-	color:red;
+  <head>
+    <title>dialog标签</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=pTeC0IZvnpLiWdXUgBzrSUQ0l0gQPcjS"></script>
+    <style>
+      *{margin:0;padding:0;}
+      #map {height:90vh;}
+      #position{
+        height: 10vh;
+        width:100%;
+        text-align:center;
+      }
+      #position span {
+        display:inline-block;
+        height:50px;
+        line-height:50px;
+        margin:10px 100px;
+        text-align:center;
+        width:100px;
+        padding:0 10px;
+        background:blue;
+        color:#fff;
+        font-size:16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="position">
+      <span id="startBtn">开始定位</span>
+      <span id="endBtn">结束定位</span>
+    </div>
+  </body>
+  <script>
+  let startBtn = document.querySelector('#startBtn');
+  let endBtn = document.querySelector('#endBtn');
+  let map = new BMap.Map("map");
+  let timeId = null;
+  map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+  map.enableScrollWheelZoom(true);
+  let position = [];
+  
+	function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (res) {
+        let lat = res.coords.latitude;
+        let lon = res.coords.longitude;
+        position.push(new BMap.Point(lat, lon));
+      //是否启用高精确度模
+      });
+    } else {
+      alert('手机不支持经纬度定位！');
+    }
 	}
-</style>
-<script>
-var x=document.getElementById("demo");
-	setInterval(function(){
-		getLocation();
-	}, 1000);
-function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-    }
-  else{x.innerHTML="Geolocation is not supported by this browser.";}
-  }
-function showPosition(position)
-  {
-  lat=position.coords.latitude;
-  lon=position.coords.longitude;
-  document.querySelectorAll("#mapholder h1")[0].innerText = '经度： ' + lat;
-  document.querySelectorAll("#mapholder h1")[1].innerText = '纬度：' + lon;
-  }
-function showError(error)
-  {
-  switch(error.code) 
-    {
-    case error.PERMISSION_DENIED:
-      x.innerHTML="User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML="Location information is unavailable."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML="The request to get user location timed out."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML="An unknown error occurred."
-      break;
-    }
-  }
-</script>
-</body>
+
+  startBtn.onclick = function () {
+    timeId = setInterval(getLocation, 3000);
+  };
+
+  endBtn.onclick = function () {
+    position = [];
+    clearInterval(timeId);
+    let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+    driving.search(...position);//waypoints表示途经点
+  };
+  </script>
 </html>
