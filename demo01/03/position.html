@@ -42,15 +42,16 @@
   let timeId = null;
   map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
   map.enableScrollWheelZoom(true);
-  let position = [];
+  let position = [new BMap.Point(114.054365,22.575238), new BMap.Point(114.066797,22.575929), new BMap.Point(114.070008,22.575499)];
   
 	function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (res) {
-        let lat = res && res.coords.latitude;
-        let lon = res && res.coords.longitude;
-        alert(lat, lon);
-        position.push(new BMap.Point(lat, lon));
+      new BMap.Geolocation().getCurrentPosition(function (res) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          let lat = res && res.point.lat;
+          let lon = res && res.point.lng;
+          position.push(new BMap.Point(lat, lon));
+        }
       //是否启用高精确度模
       });
     } else {
