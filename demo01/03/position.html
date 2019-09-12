@@ -70,6 +70,7 @@
     position.unshift();
     driving.search(start, end, {waypoints:[...position]});//waypoints表示途经点
     position = [];
+    alert('完成！');
   };
   printData.onclick = function () {
     alert(JSON.stringify(position));
