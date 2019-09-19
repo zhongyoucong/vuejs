@@ -45,23 +45,21 @@
   let position = [new BMap.Point(114.02597366, 22.54605355), new BMap.Point(114.02597366, 22.54605355), 111];
   
 	function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (res) {
-        let lat = res && res.point.lat;
-        let lon = res && res.point.lng;
-        position.push(new BMap.Point(lat, lon));
-        console.log(position);
-        alert(JSON.stringify(res));
-      //是否启用高精确度模
-      });
-    } else {
-      alert('手机不支持经纬度定位！');
-    }
+    new BMap.Geolocation().getCurrentPosition(function (r) {
+      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        console.log(r.point.lng);
+        console.log(r.point.lat);
+        position.push(new BMap.Point(r.point.lat, r.point.lng));
+      }
+      else {
+        alert('failed' + this.getStatus());
+      }
+    }, {enableHighAccuracy: true});
 	}
 
   startBtn.onclick = function () {
     position = [];
-    timeId = setInterval(getLocation, 2000);
+    timeId = setInterval(getLocation, 3000);
   };
 
   endBtn.onclick = function () {
