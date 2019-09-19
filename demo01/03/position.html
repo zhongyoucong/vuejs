@@ -50,7 +50,6 @@
         console.log(r.point.lng);
         console.log(r.point.lat);
         position.push(new BMap.Point(r.point.lat, r.point.lng));
-        alert('开始！');
       }
       else {
         alert('failed' + this.getStatus());
@@ -60,6 +59,7 @@
 
   startBtn.onclick = function () {
     position = [];
+    alert('开始！');
     timeId = setInterval(getLocation, 3000);
   };
 
