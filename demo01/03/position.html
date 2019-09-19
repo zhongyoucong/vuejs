@@ -51,6 +51,7 @@
         let lon = res && res.point.lng;
         position.push(new BMap.Point(lat, lon));
         console.log(position);
+        alert(JSON.stringify(res));
       //是否启用高精确度模
       });
     } else {
