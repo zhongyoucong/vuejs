@@ -46,6 +46,7 @@
   
 	function getLocation() {
     if (navigator.geolocation) {
+	    alert(1);
       navigator.geolocation.getCurrentPosition(function (res) {
         let lat = res && res.point.lat;
         let lon = res && res.point.lng;
