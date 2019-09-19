@@ -68,7 +68,7 @@
     let start = new BMap.Point(position[0].lat, position[0].lng);
     let end = new BMap.Point(position[position.length - 1].lat, position[position.length - 1].lng);
     let waypoints = position.slice(1, (position.length - 1));
-    driving.search(start, end, {waypoints: [position[0], position[1]]});//waypoints表示途经点
+    driving.search([...position]);//waypoints表示途经点
     alert('完成！');
   };
   printData.onclick = function () {
