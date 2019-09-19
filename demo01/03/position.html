@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=pTeC0IZvnpLiWdXUgBzrSUQ0l0gQPcjS"></script>
     <style>
       *{margin:0;padding:0;}
-      #map {height:90vh;}
+      #map {height:80vh;}
       #position{
         height: 10vh;
         width:100%;
@@ -42,7 +42,7 @@
   let timeId = null;
   map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
   map.enableScrollWheelZoom(true);
-  let position = [new BMap.Point(114.02597366, 22.54605355), new BMap.Point(114.02597366, 22.54605355)];
+  let position = [new BMap.Point(114.02597366, 22.54605355), new BMap.Point(114.02597366, 22.54605355), 111];
   
 	function getLocation() {
     if (navigator.geolocation) {
@@ -50,13 +50,8 @@
         let lat = res && res.point.lat;
         let lon = res && res.point.lng;
         position.push(new BMap.Point(lat, lon));
+        console.log(position);
       //是否启用高精确度模
-      }, function (err) {
-
-      }, {
-        enableHighAccuracy: true, //是否获取高精度经纬度，默认值为false
-        timeout: 5000, //获取位置信息的超时时间。单位为毫秒（ms），默认值为不超时
-        maximumAge: 0 //获取位置信息的缓存时间。单位为毫秒（ms），默认值为0（立即更新获取）。如果设备缓存的位置信息超过指定的缓存时间，将重新更新位置信息后再返回。
       });
     } else {
       alert('手机不支持经纬度定位！');
